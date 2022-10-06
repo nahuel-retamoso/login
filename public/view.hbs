@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"
+        integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/normalizr@3.6.1/dist/normalizr.browser.min.js"></script>
+</head>
+<body>
+        <h1>Enter Product</h1>
+        <form id="agregarProducto">
+            <label for="nombre">Nombre</label>
+            <input type="text" name="nombre" id="nombre">
+            <label for="price">Price</label>
+            <input type="text" name="price" id="price">
+            <label for="thumbnail">Thumbnail</label>
+            <input type="text" name="thumbnail" id="thumbnail">
+            <button type="submit" class="agregar">Submit</button>
+        </form>
+
+    <h1>Chat</h1>
+    <h3 id="porcentaje"></h3>
+    <form onsubmit="return addMessage(this)">
+        <input type="text" name="email" id="id">
+        <input type="text" name="nombre" id="nombre">
+        <input type="text" name="apellido" id="apellido">
+        <input type="text" name="edad" id="edad">
+        <input type="text" name="alias" id="alias">
+        <input type="text" name="avatar" id="avatar">
+        <input type="text" name="mensaje" id="mensaje">
+        <input type="submit" value="Enviar">
+    </form>
+    <div id='messages'></div>
+
+
+<h2>Lista de Productos</h2>
+    <div>
+        <table>
+            <tr>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Foto</th>
+            </tr>
+            {{#each productos}}
+            <tr>
+                <td>{{this.title}}</td>
+                <td>${{this.price}}</td>
+                <td><img width="50" src={{this.thumbnail}} alt="not found"></td>
+            </tr>
+            {{/each}}
+        </table>
+    </div>
+
+
+
+<script src='/socket.io/socket.io.js'></script>
+<script src="../js/chat.js"></script>
+<script src="../js/productos.js"></script>
+</body>
+</html>
