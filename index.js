@@ -41,9 +41,8 @@ app.get('/api/products-tests', auth, (req, res) => {
     const product = generateProduct();
     if (product.length > 0) {
         
-        res.render('view.hbs', { product });
+        res.render('view.hbs', { product, user: req.session.user });
     }
-    io.emit('productos', product);
 });
 
 const AdvancedOptions = {
@@ -67,6 +66,11 @@ function auth(req, res, next) {
     return res.status(401).send('error de autorización');
 }
 
+function desloguear(req, res, next) {
+    req.session.destroy();
+    res.redirect('/');
+}
+
 app.get('/login', (req, res) => {
     res.render('login.hbs');
 });
@@ -78,5 +82,5 @@ app.post('/login', (req, res) => {
         req.session.admin = true;
         return res.redirect('/private');
     }
-    res.redirect('/login');
+    res.redirect('/api/products-tests');
 });
